@@ -1,8 +1,61 @@
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>Test call of Gallery</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Memories 💖</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 25px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+    animation: fade 1s ease;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<img id="slide" src="1.jpeg">
+
+<script>
+const photos = [
+    "1.jpeg",
+    "2.jpeg",
+    "3.jpeg",
+    "4.jpeg",
+    "5.jpeg",
+    "6.jpeg",
+    "7.jpeg",
+    "8.jpeg",
+    "9.jpeg",
+    "10.jpeg"
+];
+
+let index = 0;
+const slide = document.getElementById("slide");
+
+setInterval(() => {
+    index = (index + 1) % photos.length;
+    slide.src = photos[index];
+}, 2500);
+</script>
+
+</body>
 </html>
