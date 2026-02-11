@@ -1,11 +1,273 @@
-<!-- redeploy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine 💖</title>
 
+<style>
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
 
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>Test page</h1>
-  </body>
+/* ================= FIRST PAGE ================= */
+.card {
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    width: 80%;
+    backdrop-filter: blur(8px);
+    animation: popIn 1.2s ease;
+}
+
+.yesbtnclass { display: none; }
+
+/* ================= SECOND PAGE ================= */
+.love-page {
+    display: none;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+    animation: loveFadeIn 1.4s ease;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* repeating background */
+.love-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("Pic2.jpeg");
+    background-repeat: repeat;
+    background-size: 160px 120px;
+    opacity: 0.25;
+    border-radius: 25px;
+    z-index: 0;
+}
+
+.love-page * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ================= TEXT & IMAGE ================= */
+h1 { font-size: 2em; }
+h2 { color: #e6f5ff; line-height: 1.6; }
+p  { font-size: 1.1em; }
+
+.heart {
+    font-size: 55px;
+    animation: beat 1s infinite;
+    margin: 15px 0;
+}
+
+.love-page img {
+    max-width: 90%;
+    max-height: 60%;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    animation: hugPulse 2.2s infinite;
+    margin: 15px 0;
+}
+
+/* ================= BUTTONS ================= */
+button {
+    background: #fff;
+    color: #ff4d6d;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ffdde1;
+    transform: scale(1.1);
+}
+
+.love-page button {
+    background: linear-gradient(135deg,#ff4d6d,#ff85a1);
+    color: white;
+    font-weight: bold;
+}
+
+/* ================= VIDEO ================= */
+#videoBox {
+    display: none;
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+#videoBox video {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    object-fit: cover;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+}
+
+/* hide everything when video plays */
+.video-mode h1,
+.video-mode h2,
+.video-mode img,
+.video-mode button {
+    display: none;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+}
+
+@keyframes hugPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes loveFadeIn {
+    from { opacity: 0; transform: scale(0.9) translateY(30px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* floating hearts */
+.floating {
+    position: absolute;
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* credit */
+.credit {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<!-- ================= FIRST PAGE ================= -->
+<div class="card" id="mainCard">
+    <h1>My Dear Prema Latha Jupalli 😘</h1>
+    <p>You are the missing piece of my puzzle 🧩</p>
+    <div class="heart">❤️</div>
+    <h2>Will you be my Valentine? 💖</h2>
+
+    <button id="yesBtn" class="yesbtnclass" onclick="yesClicked()">Yes 💋</button>
+    <button id="noBtn" onclick="noClicked()">No 😏</button>
+</div>
+
+<!-- ================= SECOND PAGE ================= -->
+<div class="love-page hidden" id="lovePage">
+    <h1>🤗💖</h1>
+    <img src="Pic1.jpeg" alt="Us Together">
+    <h2>
+        I am always with you Prema ❤️<br>
+        Forever and always 💑
+    </h2>
+
+    <button onclick="loadVideo()">Click for Latest Update 🎥</button>
+
+    <div id="videoBox">
+        <video id="loveVideo" controls>
+            <source src="update.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<div class="credit">Designed by Karthik Nalla</div>
+
+<script>
+let noCount = 0;
+
+function noClicked() {
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    noCount++;
+
+    if (noCount <= 3) {
+        noBtn.innerText = "No 😜 Don’t click me";
+        noBtn.style.position = "absolute";
+        noBtn.style.left = Math.random() * 70 + "vw";
+        noBtn.style.top = Math.random() * 70 + "vh";
+    } else {
+        noBtn.style.display = "none";
+        yesBtn.style.display = "inline-block";
+        yesBtn.innerText = "Only YES is allowed 💖";
+    }
+}
+
+function yesClicked() {
+    document.getElementById("mainCard").style.display = "none";
+    document.getElementById("lovePage").style.display = "flex";
+
+    for (let i = 0; i < 25; i++) createHeart();
+}
+
+function loadVideo() {
+    const lovePage = document.getElementById("lovePage");
+    const videoBox = document.getElementById("videoBox");
+    const video = document.getElementById("loveVideo");
+
+    document.querySelectorAll(".floating").forEach(e => e.remove());
+
+    lovePage.classList.add("video-mode");
+    videoBox.style.display = "flex";
+    video.currentTime = 0;
+    video.play();
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating";
+    heart.innerHTML = ["❤️","💖","😘","💋","💑"][Math.floor(Math.random()*5)];
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (Math.random()*2+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 20000);
+}
+</script>
+
+</body>
 </html>
